@@ -19,7 +19,7 @@ class App extends React.Component {
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
   }
-  addtrack(track) {
+  addTrack(track) {
     if(this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     } else {
@@ -53,7 +53,7 @@ class App extends React.Component {
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
   <div className="App">
     <div className="App-playlist">
-    <this.PlayList
+    <Playlist
     playListName={this.state.playListName}
     playlistTracks={this.state.playListTracks}
     onRemove={this.removeTrack()}
