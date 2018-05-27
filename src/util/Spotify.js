@@ -1,7 +1,7 @@
 let accessToken;
 let expiresIn;
 const clientID = 'bf8d14583fcf4789bf7c5f4a36f17cd5';
-const redirectURI = "http://localhost:3000/";
+const redirectURI = "https://impolite-arm.surge.sh";
 
 const Spotify = {
   getAccessToken() {
@@ -24,7 +24,8 @@ const Spotify = {
     search(term) {
       return fetch('https://api.spotify.com/v1/search?type=track&q={term}',
         {
-          headers: `Bearer ${accessToken}`
+          headers: `Bearer ${accessToken}`,
+          'Content-type': 'application/json'
         }
       ,).then(response =>{
         return response.json();
@@ -45,13 +46,17 @@ const Spotify = {
       if(!playlistName || !trackURI){
         let accessToken = Spotify.getAccessToken;
         let userId;
-        return fetch('https://api.spotify.com/v1/me', {headers: `Bearer ${accessToken}`}).then(
+        return fetch('https://api.spotify.com/v1/me', {
+          headers: `Bearer ${accessToken}`,
+          'Content-type': 'application/json'
+        }).then(
           response => {
           return response.json();
         }).then(jsonResponse => {
           return fetch(	`https://api.spotify.com/v1/users/{user_id}/playlists`, {
             headers: {
-              Authorization: `Bearer ${accessToken}`
+              Authorization: `Bearer ${accessToken}`,
+              'Content-type': 'application/json'
             },
             method: 'POST',
             body: JSON.stringify({ name: playlistName })
@@ -61,7 +66,8 @@ const Spotify = {
             let playlistID = jsonResponse.id;
             return fetch( `https://api.spotify.com/v1/users/{user_id}/playlist/{playlist_id}/tracks`, {
               headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                'Content-type': 'application/json'
               },
               method: 'POST',
               body: JSON.stringify({ uri: trackURI })
@@ -76,3 +82,4 @@ const Spotify = {
 
 
 export default Spotify;
+
