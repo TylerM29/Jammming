@@ -4,7 +4,6 @@ import './SearchResults.css';
 
 class SearchResults extends React.Component {
   SearchResults() {
-    //this.state.searchResults;
     this.setState({ searchResults: this.props.searchResults })
     this.addTrack = this.addTrack.bind(this);
   }
