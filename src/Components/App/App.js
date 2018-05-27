@@ -43,8 +43,8 @@ class App extends React.Component {
     this.onNameChange(this.onChange)
   }
   search(term) {
-    Spotify.search(term).then(searchResults => {
-      this.setState({searchResults: searchResults});
+    Spotify.search(term).then(tracks => {
+      this.setState({searchResults: tracks});
     })
   }
   render() {
@@ -67,5 +67,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
