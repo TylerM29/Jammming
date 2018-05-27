@@ -11,11 +11,11 @@ class SearchResults extends React.Component {
     return (
       <div className="SearchResults">
   <h2>Results</h2>
-  {/this.props is an external call/}
+  //{/this.props is an external call/} 
   <TrackList tracks={this.props.searchResults}
   onAdd={this.props.onAdd}
   isRemoval={false}
-  onAdd={SearchResults}/>
+  onAdd={this.SearchResults}/>
 </div>
     );
   }
