@@ -3,9 +3,6 @@ import TrackList from '../TrackList/TrackList';
 import './Playlist.css';
 
 class Playlist extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="Playlist">

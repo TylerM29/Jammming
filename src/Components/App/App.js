@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Playlist from '../Playlist/Playlist.js';
 import SearchBar from '../SearchBar/SearchBar';
@@ -24,7 +24,7 @@ class App extends React.Component {
     if(this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
       return;
     } else {
-      let tracks = this.state.playListTracks.concat(track);
+      let tracks = this.state.playlistTracks.concat(track);
       this.setState({ playlistTracks: tracks});
     }
   }
@@ -33,11 +33,11 @@ class App extends React.Component {
     this.setState({ playlistTracks: newTracks });
   }
   updatePlaylistName(name) {
-    this.setState({ playListName: name });
+    this.setState({ playlistName: name });
   }
   savePlaylist() {
     let trackURIS = this.state.playlistTracks.map(track => track.uri);
-    Spotify.savePlaylist(this.state.playListName, trackURIS);
+    Spotify.savePlaylist(this.state.playlistName, trackURIS);
   }
   handleNameChange() {
     this.onNameChange(this.onChange)
@@ -60,8 +60,8 @@ class App extends React.Component {
     onAdd={this.addTrack}
     />
     <Playlist
-    playListName={this.state.playListName}
-    playlistTracks={this.state.playListTracks}
+    playlistName={this.state.playlistName}
+    playlistTracks={this.state.playlistTracks}
     onRemove={this.removeTrack}
     onNameChange={this.updatePlaylistName}
     onSave={this.savePlaylist}
