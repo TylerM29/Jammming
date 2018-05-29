@@ -12,8 +12,8 @@ const Spotify = {
     const token = url.match(/access_token=([^&]*)/);
     const expires = url.match(/expires_in=([^&]*)/);
     if(token && expires) {
-      accessToken = token;
-      expiresIn = expires;
+      accessToken = token[1];
+      expiresIn = expires[1];
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
       return accessToken;
@@ -22,7 +22,7 @@ const Spotify = {
     }
   },
     search(term) {
-      const accessToken = Spotify.getAccessToken();
+      this.getAccessToken;
       return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {
           headers: `Bearer ${accessToken}`,
@@ -44,8 +44,8 @@ const Spotify = {
     },
 
     savePlaylist(playlistName, trackURI) {
-      if(!playlistName || !trackURI){
-        let accessToken = Spotify.getAccessToken;
+      if(!playlistName || !trackURI){return;}
+        this.getAccessToken;
         let userID;
         return fetch('https://api.spotify.com/v1/me', {
           headers: `Bearer ${accessToken}`,
@@ -54,6 +54,8 @@ const Spotify = {
           response => {
           return response.json();
         }).then(jsonResponse => {
+          return userID = jsonResponse.id;
+        }).then(()=> {
           return fetch(	`https://api.spotify.com/v1/users/${userID}/playlists`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -64,6 +66,8 @@ const Spotify = {
           }).then(response => {
             return response.json();
           }).then( jsonResponse => {
+            return userID = jsonResponse.id;
+          }).then(()=> {
             let playlistID = jsonResponse.id;
             return fetch( `https://api.spotify.com/v1/users/${userID}/playlist/${playlistID}/tracks`, {
               headers: {
@@ -77,7 +81,7 @@ const Spotify = {
         })
       }
     }
-  }
+
 
 
 
