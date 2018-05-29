@@ -1,7 +1,7 @@
 let accessToken;
 let expiresIn;
 const clientID = 'bf8d14583fcf4789bf7c5f4a36f17cd5';
-const redirectURI = "https://impolite-arm.surge.sh";
+const redirectURI = "https://tylers-project.surge.sh";
 
 const Spotify = {
   getAccessToken() {
@@ -9,8 +9,8 @@ const Spotify = {
       return accessToken;
     }
     const url = window.location.href;
-    const token = url.match(/access_token=([^&]*)/)[1];
-    const expires = url.match(/expires_in=([^&]*)/)[1];
+    const token = url.match(/access_token=([^&]*)/);
+    const expires = url.match(/expires_in=([^&]*)/);
     if(token && expires) {
       accessToken = token;
       expiresIn = expires;
@@ -22,6 +22,7 @@ const Spotify = {
     }
   },
     search(term) {
+      const accessToken = Spotify.getAccessToken();
       return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
         {
           headers: `Bearer ${accessToken}`,
